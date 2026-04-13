@@ -1,0 +1,21 @@
+# Audio files (add your own voice references locally)
+config/speakers/*.wav
+config/speakers/*.mp3
+config/speakers/originals_backup/
+
+# Generated at runtime
+config/voices.json
+config/voices.json.bak
+
+# Environment
+.env
+*.pyc
+__pycache__/
+
+# Editor backups
+*~
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

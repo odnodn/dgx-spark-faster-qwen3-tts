@@ -1,0 +1,20 @@
+diff --git a/examples/openai_server.py b/examples/openai_server.py
+index 2199e14..d38a684 100644
+--- a/examples/openai_server.py
++++ b/examples/openai_server.py
+@@ -306,6 +306,7 @@ def _parse_args():
+     p.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
+     p.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
+     p.add_argument("--device", default="cuda", help="Torch device (default: cuda)")
++    p.add_argument("--max-seq-len", type=int, default=4096, help="Max sequence length for CUDA graph static cache (default: 4096)")
+     return p.parse_args()
+ 
+ 
+@@ -344,6 +345,7 @@ def main():
+         args.model,
+         device=args.device,
+         dtype=torch.bfloat16,
++        max_seq_len=args.max_seq_len,
+     )
+     SAMPLE_RATE = tts_model.sample_rate
+     logger.info("Model ready. Sample rate: %d Hz", SAMPLE_RATE)
