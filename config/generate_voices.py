@@ -1,3 +1,4 @@
+#generate_voices.py
 """
 Scan the speakers directory for reference audio files and generate voices.json.
 
@@ -14,6 +15,7 @@ output_file = "/config/voices.json"
 
 voices = {}
 
+# Ensure the directory exists just in case
 if os.path.exists(speaker_dir):
     for filename in os.listdir(speaker_dir):
         if filename.endswith((".wav", ".mp3")):
@@ -28,13 +30,13 @@ if os.path.exists(speaker_dir):
             elif base_name.startswith("basic_ref_zh"):
                 lang = "Chinese"
 
-            # Create a clean voice ID
-            voice_id = base_name.lower()
-            prefixes_to_strip = ["en_m_", "en_f_", "de_m_", "de_f_"]
-            for prefix in prefixes_to_strip:
-                if voice_id.startswith(prefix):
-                    voice_id = voice_id.replace(prefix, "", 1)
-                    break
+        #  # Create a clean voice ID
+        #    voice_id = base_name.lower()
+        #    prefixes_to_strip = ["en_m_", "en_f_", "de_m_", "de_f_"]
+        #    for prefix in prefixes_to_strip:
+        #        if voice_id.startswith(prefix):
+        #            voice_id = voice_id.replace(prefix, "", 1)
+        #            break
 
             entry = {
                 "ref_audio": f"/config/speakers/{filename}",
