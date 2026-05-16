@@ -1,5 +1,24 @@
 import { create } from 'zustand'
 
+const DEFAULT_API_HOST = 'localhost'
+const DEFAULT_API_PORT = '8020'
+
+function readStorage(key: string, fallback: string): string {
+  try {
+    return localStorage.getItem(key) || fallback
+  } catch {
+    return fallback
+  }
+}
+
+function writeStorage(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value)
+  } catch {
+    return
+  }
+}
+
 export type TtsMode = 'voice_clone' | 'custom' | 'voice_design'
 export type GenMode = 'stream' | 'non'
 export type ModelStatus = 'off' | 'loading' | 'loaded' | 'error'
@@ -199,17 +218,17 @@ export const useStore = create<AppState>((set, get) => ({
   setRepPenalty: (n) => set({ repPenalty: n }),
   micDeviceId: '',
   setMicDeviceId: (id) => set({ micDeviceId: id }),
-  apiHost: localStorage.getItem('apiHost') || 'localhost',
+  apiHost: readStorage('apiHost', DEFAULT_API_HOST),
   setApiHost: (host) => {
-    const next = host.trim() || 'localhost'
+    const next = host.trim() || DEFAULT_API_HOST
     set({ apiHost: next })
-    localStorage.setItem('apiHost', next)
+    writeStorage('apiHost', next)
   },
-  apiPort: localStorage.getItem('apiPort') || '8020',
+  apiPort: readStorage('apiPort', DEFAULT_API_PORT),
   setApiPort: (port) => {
-    const next = port.trim() || '8020'
+    const next = port.trim() || DEFAULT_API_PORT
     set({ apiPort: next })
-    localStorage.setItem('apiPort', next)
+    writeStorage('apiPort', next)
   },
 
   // Clone mode

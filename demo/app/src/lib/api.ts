@@ -1,5 +1,9 @@
 import { useStore } from '@/store'
 
+const MIN_API_PORT = 1
+const MAX_API_PORT = 65535
+const DEFAULT_API_PORT = 8020
+
 export interface StatusResponse {
   loaded: boolean
   model: string | null
@@ -49,9 +53,15 @@ export interface TranscribeResponse {
 function buildApiUrl(path: string): string {
   const { apiHost, apiPort } = useStore.getState()
   const host = apiHost || 'localhost'
-  const parsedPort = Number.parseInt(apiPort, 10)
-  const port = Number.isInteger(parsedPort) && parsedPort > 0 && parsedPort <= 65535 ? parsedPort : 8020
+  const port = normalizePort(apiPort)
   return `http://${host}:${port}${path}`
+}
+
+function normalizePort(rawPort: string): number {
+  const parsedPort = Number.parseInt(rawPort, 10)
+  return !Number.isNaN(parsedPort) && parsedPort >= MIN_API_PORT && parsedPort <= MAX_API_PORT
+    ? parsedPort
+    : DEFAULT_API_PORT
 }
 
 export async function fetchStatus(): Promise<StatusResponse> {

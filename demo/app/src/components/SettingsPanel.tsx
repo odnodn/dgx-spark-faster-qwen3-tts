@@ -46,9 +46,7 @@ export function SettingsPanel() {
           const def = inputs.find(d => d.deviceId === 'default' || d.label.toLowerCase().includes('default'))
           setMicDeviceId(def?.deviceId || inputs[0].deviceId)
         }
-      } catch {
-        setMicDevices([])
-      }
+      } catch {}
     }
     if (settingsOpen) enumerateMics()
   }, [settingsOpen, micDeviceId, setMicDeviceId])
