@@ -21,10 +21,10 @@ import openai_server
 
 openai_server.app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origin_regex=r'^http://(localhost|127\.0\.0\.1):(4173|5173)$',
     allow_credentials=False,
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_methods=['GET', 'POST', 'OPTIONS'],
+    allow_headers=['Accept', 'Content-Type'],
 )
 
 # Load generated voices
