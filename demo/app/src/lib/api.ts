@@ -1,3 +1,5 @@
+import { useStore } from '@/store'
+
 export interface StatusResponse {
   loaded: boolean
   model: string | null
@@ -44,8 +46,15 @@ export interface TranscribeResponse {
   text: string
 }
 
+function buildApiUrl(path: string): string {
+  const { apiHost, apiPort } = useStore.getState()
+  const host = (apiHost || 'localhost').trim() || 'localhost'
+  const port = (apiPort || '8020').trim() || '8020'
+  return `http://${host}:${port}${path}`
+}
+
 export async function fetchStatus(): Promise<StatusResponse> {
-  const r = await fetch('/status')
+  const r = await fetch(buildApiUrl('/status'))
   if (!r.ok) throw new Error('Status fetch failed')
   return r.json()
 }
@@ -53,7 +62,7 @@ export async function fetchStatus(): Promise<StatusResponse> {
 export async function loadModel(modelId: string): Promise<LoadResponse> {
   const fd = new FormData()
   fd.append('model_id', modelId)
-  const r = await fetch('/load', { method: 'POST', body: fd })
+  const r = await fetch(buildApiUrl('/load'), { method: 'POST', body: fd })
   if (!r.ok) throw new Error('Load failed')
   return r.json()
 }
@@ -61,19 +70,19 @@ export async function loadModel(modelId: string): Promise<LoadResponse> {
 export async function transcribeAudio(audio: File): Promise<TranscribeResponse> {
   const fd = new FormData()
   fd.append('audio', audio)
-  const r = await fetch('/transcribe', { method: 'POST', body: fd })
+  const r = await fetch(buildApiUrl('/transcribe'), { method: 'POST', body: fd })
   if (!r.ok) throw new Error('Transcribe failed')
   return r.json()
 }
 
 export async function fetchPresetRef(id: string): Promise<PresetRefResponse> {
-  const r = await fetch(`/preset_ref/${id}`)
+  const r = await fetch(buildApiUrl(`/preset_ref/${id}`))
   if (!r.ok) throw new Error('Preset fetch failed')
   return r.json()
 }
 
 export async function* streamGenerate(fd: FormData): AsyncGenerator<StreamChunk> {
-  const res = await fetch('/generate/stream', { method: 'POST', body: fd })
+  const res = await fetch(buildApiUrl('/generate/stream'), { method: 'POST', body: fd })
   if (!res.ok) {
     const e = await res.json()
     throw new Error(e.detail || 'Request failed')
@@ -95,7 +104,7 @@ export async function* streamGenerate(fd: FormData): AsyncGenerator<StreamChunk>
 }
 
 export async function nonStreamGenerate(fd: FormData): Promise<NonStreamResponse> {
-  const res = await fetch('/generate', { method: 'POST', body: fd })
+  const res = await fetch(buildApiUrl('/generate'), { method: 'POST', body: fd })
   if (!res.ok) {
     const e = await res.json()
     throw new Error(e.detail || 'Request failed')

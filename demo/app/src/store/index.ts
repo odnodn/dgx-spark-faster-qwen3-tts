@@ -75,6 +75,10 @@ export interface AppState {
   setRepPenalty: (n: number) => void
   micDeviceId: string
   setMicDeviceId: (id: string) => void
+  apiHost: string
+  setApiHost: (host: string) => void
+  apiPort: string
+  setApiPort: (port: string) => void
 
   // Clone mode
   refFile: File | null
@@ -195,6 +199,19 @@ export const useStore = create<AppState>((set, get) => ({
   setRepPenalty: (n) => set({ repPenalty: n }),
   micDeviceId: '',
   setMicDeviceId: (id) => set({ micDeviceId: id }),
+  apiHost: localStorage.getItem('apiHost') || 'localhost',
+  setApiHost: (host) => {
+    const next = host.trim() || 'localhost'
+    set({ apiHost: next })
+    localStorage.setItem('apiHost', next)
+  },
+  apiPort: localStorage.getItem('apiPort') || '8020',
+  setApiPort: (port) => {
+    const normalized = port.replace(/\D/g, '')
+    const next = normalized || '8020'
+    set({ apiPort: next })
+    localStorage.setItem('apiPort', next)
+  },
 
   // Clone mode
   refFile: null,
