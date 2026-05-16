@@ -12,11 +12,20 @@ Endpoints added:
 
 import sys
 import json
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 # Point Python to the app directory inside the container
 sys.path.append("/app/examples")
 import openai_server
+
+openai_server.app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=False,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 # Load generated voices
 try:
