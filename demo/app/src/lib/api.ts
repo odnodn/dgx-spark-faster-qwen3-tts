@@ -48,8 +48,9 @@ export interface TranscribeResponse {
 
 function buildApiUrl(path: string): string {
   const { apiHost, apiPort } = useStore.getState()
-  const host = (apiHost || 'localhost').trim() || 'localhost'
-  const port = (apiPort || '8020').trim() || '8020'
+  const host = apiHost || 'localhost'
+  const parsedPort = Number.parseInt(apiPort, 10)
+  const port = Number.isInteger(parsedPort) && parsedPort > 0 && parsedPort <= 65535 ? parsedPort : 8020
   return `http://${host}:${port}${path}`
 }
 

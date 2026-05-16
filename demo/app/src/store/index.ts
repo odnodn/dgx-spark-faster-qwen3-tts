@@ -207,8 +207,7 @@ export const useStore = create<AppState>((set, get) => ({
   },
   apiPort: localStorage.getItem('apiPort') || '8020',
   setApiPort: (port) => {
-    const normalized = port.replace(/\D/g, '')
-    const next = normalized || '8020'
+    const next = port.trim() || '8020'
     set({ apiPort: next })
     localStorage.setItem('apiPort', next)
   },
