@@ -211,13 +211,13 @@ export function ModeClone({ onGenerate }: { onGenerate: () => void }) {
     'rounded-md p-2 transition-all duration-200',
     isActive && 'mode-row-active',
     isLoading && 'mode-row-loading',
-    !isActive && !isLoading && 'opacity-40 cursor-pointer hover:opacity-90 hover:shadow-[0_0_0_1px_#3f3f46,0_0_10px_rgba(139,92,246,0.2)]'
+    !isActive && !isLoading && 'opacity-40 cursor-pointer hover:opacity-90 mode-row-inactive'
   )
 
   return (
     <>
       <div className={rowClass} onClick={!isActive && !isLoading ? onRowClick : undefined}>
-        <div className={cn('flex items-center gap-2 text-[11px] mb-1.5', isActive ? 'text-violet-400 font-semibold' : 'text-zinc-500')}>
+        <div className={cn('flex items-center gap-2 text-[11px] mb-1.5', isActive ? 'text-violet-600 dark:text-violet-400 font-semibold' : 'text-zinc-500')}>
           {isActive && <span className="animate-blink-cursor">&#9654;</span>}
           {isLoading && <span className="animate-spin inline-block">&#9675;</span>}
           Clone &mdash; match a voice from a reference clip
@@ -230,15 +230,15 @@ export function ModeClone({ onGenerate }: { onGenerate: () => void }) {
         </div>
 
         <div className="mb-1.5">
-          <div className="flex bg-zinc-900 border border-zinc-700 rounded-md p-0.5">
-            <button onClick={() => setXvecOnly(true)} className={cn('flex-1 py-1 text-[11px] font-medium rounded transition-all', xvecOnly ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500 hover:text-zinc-300')}>Simple</button>
-            <button onClick={() => setXvecOnly(false)} className={cn('flex-1 py-1 text-[11px] font-medium rounded transition-all', !xvecOnly ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500 hover:text-zinc-300')}>Advanced</button>
+          <div className="flex bg-zinc-50 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md p-0.5">
+            <button onClick={() => setXvecOnly(true)} className={cn('flex-1 py-1 text-[11px] font-medium rounded transition-all', xvecOnly ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300')}>{`Simple`}</button>
+            <button onClick={() => setXvecOnly(false)} className={cn('flex-1 py-1 text-[11px] font-medium rounded transition-all', !xvecOnly ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300')}>{`Advanced`}</button>
           </div>
         </div>
 
         <div className="flex items-center gap-1.5 flex-wrap">
-          <label className={cn('inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 rounded-md cursor-pointer transition-all text-xs max-w-[200px]',
-            refFile || presetRefId ? 'border border-violet-500/50 text-violet-400' : 'border border-dashed border-zinc-700 text-zinc-500 hover:border-violet-500 hover:text-violet-400'
+          <label className={cn('inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-900 rounded-md cursor-pointer transition-all text-xs max-w-[200px]',
+            refFile || presetRefId ? 'border border-violet-500/50 text-violet-600 dark:text-violet-400' : 'border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:border-violet-600 dark:hover:border-violet-500 hover:text-violet-600 dark:hover:text-violet-400'
           )}>
             <Paperclip className="w-3.5 h-3.5 flex-shrink-0" />
             <span className="truncate">{refLabel}</span>
@@ -248,7 +248,7 @@ export function ModeClone({ onGenerate }: { onGenerate: () => void }) {
           <button
             onClick={toggleRec}
             className={cn('w-8 h-8 flex items-center justify-center rounded-md border transition-all flex-shrink-0',
-              recActive ? 'border-red-500 text-red-400 animate-blink' : 'border-zinc-700 bg-zinc-900 text-zinc-500 hover:border-violet-500 hover:text-violet-400'
+              recActive ? 'border-red-500 text-red-500 dark:text-red-400 animate-blink' : 'border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 hover:border-violet-600 dark:hover:border-violet-500 hover:text-violet-600 dark:hover:text-violet-400'
             )}
             title="Record from microphone"
           >
@@ -263,7 +263,7 @@ export function ModeClone({ onGenerate }: { onGenerate: () => void }) {
               key={p.id}
               onClick={() => selectPreset(p.id)}
               className={cn('px-2.5 py-1.5 rounded-md text-xs border transition-all',
-                presetRefId === p.id ? 'border-violet-500 bg-violet-500/10 text-violet-400' : 'border-zinc-700 bg-zinc-800 text-zinc-400 hover:border-violet-500 hover:text-violet-400 hover:bg-violet-500/5'
+                presetRefId === p.id ? 'border-violet-500 bg-violet-500/10 text-violet-600 dark:text-violet-400' : 'border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-violet-600 dark:hover:border-violet-500 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-500/5'
               )}
             >
               {p.label || p.id}
@@ -280,7 +280,7 @@ export function ModeClone({ onGenerate }: { onGenerate: () => void }) {
         </div>
 
         {recActive && (
-          <div className="h-0.5 bg-zinc-800 rounded overflow-hidden mt-1.5">
+          <div className="h-0.5 bg-zinc-200 dark:bg-zinc-800 rounded overflow-hidden mt-1.5">
             <div
               className="h-full rounded transition-all duration-75"
               style={{ width: `${recLevel * 100}%`, background: 'linear-gradient(90deg, #22c55e, #eab308, #ef4444)' }}

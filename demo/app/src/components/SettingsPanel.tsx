@@ -84,10 +84,10 @@ export function SettingsPanel() {
 
   return (
     <Sheet open={settingsOpen} onOpenChange={setSettingsOpen}>
-      <SheetContent side="right" className="w-80 overflow-y-auto p-0">
+      <SheetContent side="right" className="w-80 overflow-y-auto p-0 bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-800">
         <div className="flex flex-col h-full">
-          <SheetHeader className="px-4 py-4 border-b border-zinc-800">
-            <SheetTitle>Settings</SheetTitle>
+          <SheetHeader className="px-4 py-4 border-b border-zinc-200 dark:border-zinc-800">
+            <SheetTitle className="text-zinc-900 dark:text-zinc-100">Settings</SheetTitle>
           </SheetHeader>
           <div className="flex-1 overflow-y-auto px-4 py-3 space-y-4">
             <SectionLabel>Model</SectionLabel>
@@ -95,7 +95,7 @@ export function SettingsPanel() {
               <select
                 value={selectedModel}
                 onChange={e => setSelectedModel(e.target.value)}
-                className="flex-1 h-8 rounded-md border border-zinc-700 bg-zinc-900 px-2 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="flex-1 h-8 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
               >
                 {availableModelOptions.map(m => (
                   <option key={m.id} value={m.id}>{m.name}</option>
@@ -118,7 +118,7 @@ export function SettingsPanel() {
               <select
                 value={language}
                 onChange={e => setLanguage(e.target.value)}
-                className="flex-1 h-8 rounded-md border border-zinc-700 bg-zinc-900 px-2 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="flex-1 h-8 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
               >
                 {['English', 'Chinese', 'French', 'German', 'Spanish', 'Auto'].map(l => (
                   <option key={l}>{l}</option>
@@ -165,7 +165,7 @@ export function SettingsPanel() {
               <select
                 value={micDeviceId}
                 onChange={e => setMicDeviceId(e.target.value)}
-                className="flex-1 h-8 rounded-md border border-zinc-700 bg-zinc-900 px-2 text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="flex-1 h-8 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
               >
                 {micDevices.length === 0 && <option value="">Default microphone</option>}
                 {micDevices.map((d, i) => (
@@ -184,7 +184,7 @@ export function SettingsPanel() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500 border-t border-zinc-800 pt-3 mt-1">
+    <h3 className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500 border-t border-zinc-200 dark:border-zinc-800 pt-3 mt-1">
       {children}
     </h3>
   )
@@ -193,7 +193,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function SettingsRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2">
-      <label className="text-xs text-zinc-400 min-w-[90px] flex-shrink-0">{label}</label>
+      <label className="text-xs text-zinc-600 dark:text-zinc-400 min-w-[90px] flex-shrink-0">{label}</label>
       {children}
     </div>
   )
@@ -205,7 +205,7 @@ function Toggle({ options, value, onChange }: {
   onChange: (v: string) => void
 }) {
   return (
-    <div className="flex flex-1 bg-zinc-900 border border-zinc-700 rounded-md p-0.5">
+    <div className="flex flex-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md p-0.5">
       {options.map(opt => (
         <button
           key={opt.value}
@@ -213,8 +213,8 @@ function Toggle({ options, value, onChange }: {
           className={cn(
             'flex-1 px-2 py-1 text-[11px] font-medium rounded transition-all',
             value === opt.value
-              ? 'bg-zinc-700 text-zinc-100 shadow-sm'
-              : 'text-zinc-500 hover:text-zinc-300'
+              ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm'
+              : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
           )}
         >
           {opt.label}

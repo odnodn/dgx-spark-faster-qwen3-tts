@@ -74,9 +74,9 @@ export function ModelLoaderDialog({ open, mode, onClose, availableModels }: Mode
     <DialogPrimitive.Root open={open} onOpenChange={v => !v && onClose()}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] max-h-[85vh] overflow-y-auto bg-zinc-950 border border-zinc-800 border-t-2 border-t-violet-500 rounded-2xl p-5 shadow-[0_0_40px_rgba(139,92,246,0.2),0_20px_60px_rgba(0,0,0,0.5)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+        <DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] max-h-[85vh] overflow-y-auto bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 border-t-2 border-t-violet-500 rounded-2xl p-5 shadow-[0_0_40px_rgba(139,92,246,0.2),0_20px_60px_rgba(0,0,0,0.5)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
           <div className="flex items-center mb-3">
-            <button onClick={onClose} className="text-[11px] font-mono text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1">
+            <button onClick={onClose} className="text-[11px] font-mono text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
               &#9664; BACK
             </button>
             <div className="flex-1 text-center text-xs font-bold font-mono tracking-widest text-violet-400" style={{ textShadow: '0 0 8px rgba(139,92,246,0.6)' }}>
@@ -93,13 +93,13 @@ export function ModelLoaderDialog({ open, mode, onClose, availableModels }: Mode
                   'border rounded-md p-3 text-left transition-all',
                   selected === m.id
                     ? 'border-violet-500 bg-violet-500/10 shadow-[0_0_8px_rgba(139,92,246,0.35)]'
-                    : 'border-zinc-700 bg-zinc-900 hover:border-violet-500/40 hover:bg-violet-500/5'
+                    : 'border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 hover:border-violet-500/40 hover:bg-violet-500/5'
                 )}
               >
-                <div className={cn('text-sm font-semibold', selected === m.id ? 'text-violet-400' : 'text-zinc-100')}>
+                <div className={cn('text-sm font-semibold', selected === m.id ? 'text-violet-400' : 'text-zinc-900 dark:text-zinc-100')}>
                   {m.name}
                 </div>
-                <div className="text-[11px] text-zinc-500 mt-0.5">{m.sub}</div>
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-0.5">{m.sub}</div>
               </button>
             ))}
           </div>

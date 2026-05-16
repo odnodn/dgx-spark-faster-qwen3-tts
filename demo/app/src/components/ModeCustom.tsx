@@ -58,13 +58,13 @@ export function ModeCustom({ onGenerate }: { onGenerate: () => void }) {
               LOAD &#9654;
             </span>
           )}
-          <div className="flex-1 h-px bg-zinc-700" />
+          <div className="flex-1 h-px bg-zinc-300 dark:bg-zinc-700" />
         </div>
         <div className="flex items-center gap-1.5">
           <select
             value={selectedSpeaker}
             onChange={e => setSelectedSpeaker(e.target.value)}
-            className="flex-1 h-8 rounded-md border border-zinc-700 bg-zinc-900 px-2 text-xs text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
+            className="flex-1 h-8 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
           >
             {speakerList.map(id => (
               <option key={id} value={id}>{getLabel(id)}</option>
@@ -82,8 +82,8 @@ export function ModeCustom({ onGenerate }: { onGenerate: () => void }) {
           <textarea
             value={customInstr}
             onChange={e => setCustomInstr(e.target.value)}
-            placeholder="Voice style instructions (optional)\u2026"
-            className="w-full px-2.5 py-1.5 bg-zinc-900 border border-zinc-700 rounded-md text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-violet-500/50 resize-none"
+            placeholder="Voice style instructions (optional)…"
+            className="w-full px-2.5 py-1.5 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-violet-500/50 resize-none"
             rows={1}
           />
         </div>

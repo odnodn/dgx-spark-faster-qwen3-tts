@@ -15,14 +15,14 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'flex flex-col border-r border-zinc-800 bg-zinc-950 flex-shrink-0 transition-all duration-200',
+        'flex flex-col border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex-shrink-0 transition-all duration-200',
         sidebarOpen ? 'w-44' : 'w-12'
       )}
     >
-      <div className="flex items-center justify-end p-2 border-b border-zinc-800 h-11">
+      <div className="flex items-center justify-end p-2 border-b border-zinc-200 dark:border-zinc-800 h-11">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-1.5 rounded text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800 transition-colors"
+          className="p-1.5 rounded text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
         >
           {sidebarOpen ? <PanelLeftClose className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
         </button>
@@ -35,8 +35,8 @@ export function Sidebar() {
             className={cn(
               'flex items-center gap-2.5 rounded-md px-2 py-2 text-sm transition-colors text-left',
               activeMode === id
-                ? 'bg-violet-500/15 text-violet-400 font-medium'
-                : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60'
+                ? 'bg-violet-600/10 dark:bg-violet-500/15 text-violet-600 dark:text-violet-400 font-medium'
+                : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
             )}
             title={!sidebarOpen ? label : undefined}
           >

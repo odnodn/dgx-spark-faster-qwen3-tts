@@ -34,14 +34,14 @@ export function ModeVoiceDesign({ onGenerate }: { onGenerate: () => void }) {
               LOAD &#9654;
             </span>
           )}
-          <div className="flex-1 h-px bg-zinc-700" />
+          <div className="flex-1 h-px bg-zinc-300 dark:bg-zinc-700" />
         </div>
         <div className="flex items-center gap-1.5">
           <textarea
             value={voiceInstr}
             onChange={e => setVoiceInstr(e.target.value)}
-            placeholder="e.g. warm, calm female narrator\u2026"
-            className="flex-1 px-2.5 py-1.5 bg-zinc-900 border border-zinc-700 rounded-md text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-violet-500/50 resize-none"
+            placeholder="e.g. warm, calm female narrator…"
+            className="flex-1 px-2.5 py-1.5 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-violet-500/50 resize-none"
             rows={1}
           />
           <button

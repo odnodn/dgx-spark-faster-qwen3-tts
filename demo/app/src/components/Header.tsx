@@ -14,13 +14,13 @@ export function Header() {
   }[modelStatus]
 
   return (
-    <header className="flex items-center gap-2 px-4 h-11 border-b border-zinc-800 flex-shrink-0 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-10">
+    <header className="flex items-center gap-2 px-4 h-11 border-b border-zinc-200 dark:border-zinc-800 flex-shrink-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-10">
       <h1 className="text-sm font-semibold tracking-tight">faster-qwen3-tts</h1>
       <Badge>CUDA GRAPHS</Badge>
       <div className="flex-1" />
       <button
         onClick={() => setSettingsOpen(true)}
-        className="flex items-center gap-1.5 text-[11px] text-zinc-500 px-2.5 py-1 bg-zinc-900 border border-zinc-800 rounded-full hover:border-zinc-700 transition-colors cursor-pointer"
+        className="flex items-center gap-1.5 text-[11px] text-zinc-500 px-2.5 py-1 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors cursor-pointer"
       >
         <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors ${dotClass}`} />
         <span>{modelStatusText}</span>

@@ -28,7 +28,7 @@ export function AudioResults() {
       )}
 
       {generating && (
-        <div className="h-0.5 bg-zinc-800 rounded overflow-hidden">
+        <div className="h-0.5 bg-zinc-200 dark:bg-zinc-800 rounded overflow-hidden">
           <div
             className={cn(
               'h-full bg-violet-500 rounded transition-all',
@@ -49,7 +49,7 @@ export function AudioResults() {
               />
               <button
                 onClick={dlAudio}
-                className="w-7 h-7 flex items-center justify-center border border-zinc-700 rounded text-zinc-500 hover:border-violet-500 hover:text-violet-400 transition-colors flex-shrink-0"
+                className="w-7 h-7 flex items-center justify-center border border-zinc-300 dark:border-zinc-700 rounded text-zinc-500 hover:border-violet-500 hover:text-violet-400 transition-colors flex-shrink-0"
                 title="Download WAV"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -57,7 +57,7 @@ export function AudioResults() {
             </div>
           )}
 
-          <div className="flex items-center gap-2.5 flex-wrap px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 rounded-md text-[11px]">
+          <div className="flex items-center gap-2.5 flex-wrap px-2.5 py-1.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md text-[11px]">
             <MetricItem label="TTFA" value={metrics.ttfa != null ? `${Math.round(metrics.ttfa)}ms` : undefined} />
             <MetricItem label="Client" value={metrics.client != null ? `${Math.round(metrics.client)}ms` : undefined} />
             {metrics.clone != null && <MetricItem label="Clone" value={`${Math.round(metrics.clone)}ms`} />}
@@ -86,7 +86,7 @@ function MetricItem({ label, value }: { label: string; value?: string }) {
   return (
     <div className="flex items-baseline gap-1">
       <span className="text-zinc-500 uppercase tracking-wide text-[10px]">{label}</span>
-      <span className="font-mono font-semibold text-[12px] text-zinc-200">{value ?? '—'}</span>
+      <span className="font-mono font-semibold text-[12px] text-zinc-800 dark:text-zinc-200">{value ?? '—'}</span>
     </div>
   )
 }
