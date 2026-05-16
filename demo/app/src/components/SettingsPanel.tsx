@@ -27,6 +27,8 @@ export function SettingsPanel() {
     topK, setTopK,
     repPenalty, setRepPenalty,
     micDeviceId, setMicDeviceId,
+    apiHost, setApiHost,
+    apiPort, setApiPort,
     setSpeakers, setPresetRefs,
   } = useStore()
 
@@ -174,6 +176,28 @@ export function SettingsPanel() {
                   </option>
                 ))}
               </select>
+            </SettingsRow>
+
+            <SectionLabel>API Endpoint</SectionLabel>
+            <SettingsRow label="Host / IP">
+              <input
+                value={apiHost}
+                onChange={e => setApiHost(e.target.value)}
+                placeholder="localhost"
+                className="flex-1 h-8 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
+              />
+            </SettingsRow>
+            <SettingsRow label="Port">
+              <input
+                type="number"
+                inputMode="numeric"
+                min={1}
+                max={65535}
+                value={apiPort}
+                onChange={e => setApiPort(e.target.value)}
+                placeholder="8020"
+                className="flex-1 h-8 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-violet-500"
+              />
             </SettingsRow>
           </div>
         </div>

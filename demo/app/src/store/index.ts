@@ -1,5 +1,24 @@
 import { create } from 'zustand'
 
+const DEFAULT_API_HOST = 'localhost'
+const DEFAULT_API_PORT = '8020'
+
+function readStorage(key: string, fallback: string): string {
+  try {
+    return localStorage.getItem(key) || fallback
+  } catch {
+    return fallback
+  }
+}
+
+function writeStorage(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value)
+  } catch {
+    return
+  }
+}
+
 export type TtsMode = 'voice_clone' | 'custom' | 'voice_design'
 export type GenMode = 'stream' | 'non'
 export type ModelStatus = 'off' | 'loading' | 'loaded' | 'error'
@@ -75,6 +94,10 @@ export interface AppState {
   setRepPenalty: (n: number) => void
   micDeviceId: string
   setMicDeviceId: (id: string) => void
+  apiHost: string
+  setApiHost: (host: string) => void
+  apiPort: string
+  setApiPort: (port: string) => void
 
   // Clone mode
   refFile: File | null
@@ -195,6 +218,18 @@ export const useStore = create<AppState>((set, get) => ({
   setRepPenalty: (n) => set({ repPenalty: n }),
   micDeviceId: '',
   setMicDeviceId: (id) => set({ micDeviceId: id }),
+  apiHost: readStorage('apiHost', DEFAULT_API_HOST),
+  setApiHost: (host) => {
+    const next = host.trim() || DEFAULT_API_HOST
+    set({ apiHost: next })
+    writeStorage('apiHost', next)
+  },
+  apiPort: readStorage('apiPort', DEFAULT_API_PORT),
+  setApiPort: (port) => {
+    const next = port.trim() || DEFAULT_API_PORT
+    set({ apiPort: next })
+    writeStorage('apiPort', next)
+  },
 
   // Clone mode
   refFile: null,
